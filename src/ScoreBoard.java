@@ -75,8 +75,40 @@ public class ScoreBoard {
 		B[1] = 0;
 	}
  	
-	public String printScore() {
-		return null;
+	public void processPoints(String pts1, String pts2){
+		if(isDeuce()){
+			pts1 = "D";
+			pts2 = "D";
+		}
+		int FLAG = 0;
+		if((FLAG = getAdvantage())>0){
+			if(FLAG == 1){
+				pts1 = "A";
+				pts2 = "-";
+			}
+			else if(FLAG == 2){
+				pts1 = "-";
+				pts2 = "A";
+			}
+		}
+	}
+	
+	public String printScore() 
+	{
+		String pts1 = "";
+		String pts2 = "";
+		for(int i = 0; i<A.length; i++ ){
+			pts1 = pts1 + arr[A[2]];
+			pts2 = pts2 + arr[B[2]];
+			processPoints(pts1, pts2);
+			System.out.println("-----------------------");
+			System.out.println("| Player|"+"SET"+"|GAME| PTS|");
+			System.out.println("-----------------------");
+			System.out.println("|   A   | "+A[0]+" |"+" "+A[1]+"  |"+"  "+pts1+"|");
+			System.out.println("-----------------------");
+			System.out.println("|   B   | "+B[0]+" |"+" "+B[1]+"  |"+"  "+pts2+"|");
+			System.out.println("-----------------------");
+		}
 	}
 	
 	public void parse(String order) {
@@ -91,4 +123,5 @@ public class ScoreBoard {
 		ScoreBoard scoreBoard = new ScoreBoard(3);
 		scoreBoard.parse(pointsOrder);
 	}
+	
 }
